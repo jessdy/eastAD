@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/sm.css" />
+<link rel="stylesheet" type="text/css" href="css/custom.css" />
+</head>
+
+<body>
+	<div class="page-group">
+		<div class="page" id="page-index">
+			<!-- 登陆页面开始 -->
+			<header class="bar bar-nav">
+				<!--<a class="button-link button-nav pull-left back" style="color: white;">
+      					<span class="icon icon-left"></span>
+      					返回
+    				</a>-->
+				<h1 class="title">选择书报亭</h1>
+			</header>
+			<div class="content">
+				<img src="images/header.png" style="width: 100%;" />
+				<div class="content-padded">
+					<h3>选择行政区：</h3>
+					<div class="list-block" style="margin: 10px">
+						<ul>
+							<li>
+								<div class="item-content">
+									<select id="district">
+
+									</select>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="row">
+						<button id="submit"
+							class="button button-big button-fill button-danger col-100 row">确定</button>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- /登录页面结束 -->
+		</div>
+	</div>
+	<script src="js/zepto.js"></script>
+	<script src="js/sm.js"></script>
+	<script src="js/sm-extend.js"></script>
+	<script src="../static/comm.js"></script>
+	<script type="text/javascript">
+		$.config = {router: false}
+		$(function() {
+			for ( var i in $.districts) {
+				$("#district").append(
+						'<option value="' + i + '">' + $.districts[i]
+								+ '</option>');
+			}
+			$("#submit").click(function() {
+				window.localStorage.setItem("district", $("#district").val());
+				window.location.href= "index_supervisor2.html";
+			});
+		});
+	</script>
+</body>
+
+</html>

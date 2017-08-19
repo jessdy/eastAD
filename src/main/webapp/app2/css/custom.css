@@ -1,0 +1,159 @@
+.bar {
+	background: #3398CC;
+}
+.content{
+	background: #fff;
+}
+.content .content-padded img {
+	width: 100% !important;
+	height: auto !important;
+}
+.bar .title {
+	color: #fff;
+	font-weight: bold;
+}
+
+.bar .button-link {
+	color: #fff;
+}
+
+#homepage .item-inner {
+	height: 3rem;
+	line-height: 2.1rem;
+}
+
+#homepage .item-inner .index-title {
+	padding-left: 2.6rem;
+	background-repeat: no-repeat;
+	background-size: 2rem;
+	background-position-x: left;
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+.event-list {
+	margin: 0;
+}
+
+.event-list .item-inner:after {
+	height: 0;
+}
+
+.event-list li:after {
+	content: '';
+	position: absolute;
+	left: 0.5rem;
+	bottom: 0;
+	right: 0.5rem;
+	top: auto;
+	height: 1px;
+	width: auto;
+	background-color: #3CA8CC;
+	display: block;
+	z-index: 15;
+}
+
+.event-list .item-inner {
+	line-height: 1em;
+	overflow: visible;
+}
+
+.event-list .item-title {
+	line-height: 1em;
+	color: #333;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.event-list.media-list .item-media {
+	padding-top: .65rem;
+	padding-bottom: .7rem;
+}
+
+.event-list.media-list .item-inner {
+	padding-top: .5rem;
+}
+
+.event-list .item-inner .item-subtitle {
+	line-height: 1.3em;
+	margin-top: 0.3rem;
+	color: #929292;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	white-space: normal;
+	font-size: 10px;
+}
+
+.event-list .item-inner .item-text {
+	font-size: 8px;
+	color: #929292;
+}
+
+.event-list .item-media {
+	width: 4rem;
+}
+
+.event-list .item-media img {
+	width: 100%;
+	height: 3rem;
+}
+
+.button.button-success {
+	background-color: #3FCDCE;
+	font-size: 8px;
+	height: 1rem;
+	line-height: 1rem;
+}
+.button.button-primary{
+	background-color: #3FA1CE;
+}
+.button.button-primary.button-detail {
+	font-size: 8px;
+	height: 1rem;
+	line-height: 1rem;
+}
+.button.button-primary.button-join {
+	border-radius: 0;
+	height: 1.8rem;
+	line-height: 1.8rem;
+}
+.article-title {
+	width: 100%;
+	padding: 0 0.3rem 0.5rem 0;
+	border-bottom: 1px solid #3FA1CE;
+	font-size: 0.9rem;
+	text-align: center;
+}
+.button-light.button-fill.article-date {
+	background-color: #F2F2F2;
+	color: #A9A9A9;
+	border-radius: 0;
+	height: 1.8rem;
+	line-height: 1.8rem;
+}
+.article-content {
+	font-size: 11px;
+}
+.company-list,.company-list a,.company-list a:visited {
+	width: 100%;
+	color: #232323;
+	font-size: 13px;
+}
+.company-list thead {
+	background-color: #BFDFEE;
+}
+.company-list thead th,.company-list tbody td {
+	text-align: left;
+	padding-left: 10px;
+	height: 1.8rem;
+	line-height: 1.8rem;
+}
+.company-list tbody tr:nth-of-type(odd){
+	background-color: #EFEFEF;
+}
+.company-list tbody tr:nth-of-type(even){
+	background-color: #E6E6E6;
+}

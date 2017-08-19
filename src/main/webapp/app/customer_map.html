@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/sm.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page" id="page-index">
+				<!-- 登陆页面开始 -->
+				<header class="bar bar-nav">
+					<a class="button-link button-nav pull-left back external" style="color: white;" external href="index_customer.html">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">查看广告</h1>
+				</header>
+				<div class="content" style="text-align: center;">
+					<div class="content-padded">
+						<div id="map" style="width: 100%;height: 390px;"></div>
+					</div>
+				</div>
+				<!-- /登录页面结束 -->
+			</div>
+		</div>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0XDRb6FgFiVwgWc7lPKG5Udx9nGnpdpQ"></script>
+		<script src="js/zepto.js"></script>
+		<script src="js/sm.js"></script>
+		<script src="js/sm-extend.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var map = new BMap.Map("map");// 创建地图实例  
+				map.centerAndZoom("上海", 11);
+				map.addControl(new BMap.NavigationControl());
+				map.enableScrollWheelZoom(true);
+				$.ajax({
+					type: "get",
+					url: "/services/customer/adpositions",
+					success: function(data) {
+						for (var i in data) {
+							var position = data[i].position.split(',');
+							var point = new BMap.Point(position[0], position[1]);
+							var marker = new BMap.Marker(point);
+							marker.standid = data[i].id;
+							map.addOverlay(marker);
+							marker.addEventListener("click",attribute);
+						}
+					}
+				});
+				function attribute(e) {
+					var p = e.target;
+					window.location.href = "ad_view.html?id=" + p.standid;
+				}
+			})
+		</script>
+	</body>
+
+</html>

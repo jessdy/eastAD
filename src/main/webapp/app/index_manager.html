@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/sm.css" />
+<link rel="stylesheet" type="text/css" href="css/custom.css" />
+</head>
+
+<body>
+	<div class="page-group">
+		<div class="page" id="page-index">
+			<!-- 登陆页面开始 -->
+			<header class="bar bar-nav">
+				<!--<a class="button-link button-nav pull-left back" style="color: white;">
+      					<span class="icon icon-left"></span>
+      					返回
+    				</a>-->
+				<h1 class="title">选择拍摄版面</h1>
+			</header>
+			<div class="content">
+				<div class="toolbar">请选择您要拍摄的版面：</div>
+				<img src="images/header.png" style="width: 100%;" />
+				<div class="content-padded">
+					<div class="row">
+						<div class="col-33" id="ad1" style="background-size: cover;">
+							<a style="padding-top: 0" class="advertise-block"
+								href="manager_photo.html?position=1" external>1号位</a>
+						</div>
+						<div class="col-33" id="ad2" style="background-size: cover;">
+							<a style="padding-top: 0" class="advertise-block"
+								href="manager_photo.html?position=2" external>2号位</a>
+						</div>
+						<div class="col-33" id="ad3" style="background-size: cover;">
+							<a style="padding-top: 0" class="advertise-block"
+								href="manager_photo.html?position=3" external>3号位</a>
+						</div>
+						<div class="col-33" id="ad4" style="background-size: cover;">
+							<a style="padding-top: 0" class="advertise-block"
+								href="manager_photo.html?position=4" external>4号位</a>
+						</div>
+						<div class="col-33" id="ad5" style="background-size: cover;">
+							<a style="padding-top: 0" class="advertise-block"
+								href="manager_photo.html?position=5" external>5号位</a>
+						</div>
+						<div class="col-33" id="ad6" style="background-size: cover;">
+							<a style="padding-top: 0" class="advertise-block"
+								href="manager_photo.html?position=6" external>6号位</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="content-block" id="result" style="color: red;">
+							<button style="display: none;" id="submit"
+								class="button button-big button-fill button-danger col-100">提交上传</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /登录页面结束 -->
+		</div>
+	</div>
+	<script src="js/zepto.js"></script>
+	<script src="js/sm.js"></script>
+	<script src="js/sm-extend.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$.ajax({
+				type : "get",
+				url : "/services/weixin/app/adposition",
+				success : function(data) {
+					if(data.photo1) {
+						$("#ad1").css({
+							"backgroundImage" : "url(/upload/" + data.photo1 + ")"
+						});
+						if(!window.localStorage.getItem('pos1')) {
+							window.localStorage.setItem('pos1', data.photo1);
+						}
+					}
+					if(data.photo2) {
+						$("#ad2").css({
+							"backgroundImage" : "url(/upload/" + data.photo2 + ")"
+						});
+						if(!window.localStorage.getItem('pos2')) {
+							window.localStorage.setItem('pos2', data.photo2);
+						}
+					}
+					if(data.photo3) {
+						$("#ad3").css({
+							"backgroundImage" : "url(/upload/" + data.photo3 + ")"
+						});
+						if(!window.localStorage.getItem('pos3')) {
+							window.localStorage.setItem('pos3', data.photo3);
+						}
+					}
+					if(data.photo4) {
+						$("#ad4").css({
+							"backgroundImage" : "url(/upload/" + data.photo4 + ")"
+						});
+						if(!window.localStorage.getItem('pos4')) {
+							window.localStorage.setItem('pos4', data.photo4);
+						}
+					}
+					if(data.photo5) {
+						$("#ad5").css({
+							"backgroundImage" : "url(/upload/" + data.photo5 + ")"
+						});
+						if(!window.localStorage.getItem('pos5')) {
+							window.localStorage.setItem('pos5', data.photo5);
+						}
+					}
+					if(data.photo6) {
+						$("#ad6").css({
+							"backgroundImage" : "url(/upload/" + data.photo6 + ")"
+						});
+						if(!window.localStorage.getItem('pos6')) {
+							window.localStorage.setItem('pos6', data.photo6);
+						}
+					}
+					if(window.localStorage.getItem('pos1')) {
+						$("#ad1").css({
+							"backgroundImage" : "url(/upload/" + window.localStorage.getItem('pos1') + ")"
+						});
+						$("#submit").show();
+					}
+					if(window.localStorage.getItem('pos2')) {
+						$("#ad2").css({
+							"backgroundImage" : "url(/upload/" + window.localStorage.getItem('pos2') + ")"
+						});
+						$("#submit").show();
+					}
+					if(window.localStorage.getItem('pos3')) {
+						$("#ad3").css({
+							"backgroundImage" : "url(/upload/" + window.localStorage.getItem('pos3') + ")"
+						});
+						$("#submit").show();
+					}
+					if(window.localStorage.getItem('pos4')) {
+						$("#ad4").css({
+							"backgroundImage" : "url(/upload/" + window.localStorage.getItem('pos4') + ")"
+						});
+						$("#submit").show();
+					}
+					if(window.localStorage.getItem('pos5')) {
+						$("#ad5").css({
+							"backgroundImage" : "url(/upload/" + window.localStorage.getItem('pos5') + ")"
+						});
+						$("#submit").show();
+					}
+					if(window.localStorage.getItem('pos6')) {
+						$("#ad6").css({
+							"backgroundImage" : "url(/upload/" + window.localStorage.getItem('pos6') + ")"
+						});
+						$("#submit").show();
+					}
+				}
+			});
+			$("#submit").click(function(){
+				$.ajax({
+					type: 'post',
+					url: '/services/weixin/app/photo',
+					data: {
+						pic1: window.localStorage.getItem('pos1'),
+						pic2: window.localStorage.getItem('pos2'),
+						pic3: window.localStorage.getItem('pos3'),
+						pic4: window.localStorage.getItem('pos4'),
+						pic5: window.localStorage.getItem('pos5'),
+						pic6: window.localStorage.getItem('pos6')
+					},
+					success: function(data) {
+						window.localStorage.removeItem('pos1');
+						window.localStorage.removeItem('pos2');
+						window.localStorage.removeItem('pos3');
+						window.localStorage.removeItem('pos4');
+						window.localStorage.removeItem('pos5');
+						window.localStorage.removeItem('pos6');
+						$("#result").html("照片已上传！");
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

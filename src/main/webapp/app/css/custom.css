@@ -1,0 +1,44 @@
+.bar {
+	background: #e81f18;
+}
+
+.bar .title {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.card {
+	box-shadow: none;
+	border: 1px solid #2c3d95;
+}
+
+.button {
+	border: 1px solid #2c3d95;
+	color: #2c3d95;
+	background-color: #fff;
+}
+
+.card-header,.card-header .title {
+	color: #2C3D95;
+	text-align: center;
+}
+.card-header .icon {
+	margin-left: 0.75rem;
+	color: #2C3D95;
+}
+.login-button{
+	font-weight: bold;
+}
+.toolbar {
+	padding: 5px 10px;
+}
+.advertise-block {
+	border: 2px dotted #E81F18;
+	width: 100%;
+	height: 8rem;
+	display: block;
+	text-align: center;
+	padding: 2rem 0;
+	color: #E81F18;
+	font-weight: bold;
+}

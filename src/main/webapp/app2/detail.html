@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+		<script src="../static/comm.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>电梯协会志愿者 - 微信平台</title>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id='detail'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">公益资讯</h1>
+				</header>
+				<div class="content" style="background-color: #fff;">
+					<div class="content-padded">
+						<div class="article-title">
+						</div>
+						<div class="content-padded">
+							<div class="button button-fill button-light article-date"></div>
+						</div>
+						<div class="content-padded article-content"></div>
+						<div class="content-padded" id="chooseDate">
+							选择活动日期：
+							
+						</div>
+						<div class="content-padded">
+							<a class="button button-fill button-primary button-join disabled opbtn">加入活动</a>
+							<br /><br />
+							<table class="company-list" id="company-list">
+								<thead>
+									<tr>
+										<th>已加入此活动的企业：</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				var id = $.getParam("id");
+				var companyJoin = function(id) {
+					if($(".canchoose.button-fill").length>0) {
+						$.ajax({
+							url: "../event/companyjoin/" + id,
+							type: 'post',
+							data: {
+								date: $(".canchoose.button-fill").html()
+							},
+							success: function() {
+								$(".opbtn").addClass('disabled').html('等待审核');
+								alert("已申领该活动，请等待审核");
+							}
+						});
+					} else {
+						alert('请选择活动日期');
+					}
+				}
+				var personJoin = function(id) {
+					$.ajax({
+						url: "../event/personjoin/" + id,
+						type: 'post',
+						success: function() {
+							$(".opbtn").html('等待审核');
+						}
+					})
+				}
+				$.ajax({
+					url: "../event/" + id,
+					success: function(data) {
+						$(".article-title").html(data.name);
+						$(".article-date").html(new Date(data.uptime).Format('yyyy-MM-dd'));
+						$(".article-content").html(data.content);
+						switch (data.canjoin) {
+							case 1:
+								var eventDate = data.eventDate;
+								if(eventDate) {
+									var edates = eventDate.split(",");
+									for(var i in edates) {
+										$("#chooseDate").append('<p><a class="button canchoose">'+edates[i]+'</a></p>');
+									}
+									$(".canchoose").click(function(){
+										$(".canchoose").removeClass("button-fill");
+										$(this).addClass("button-fill");
+									})
+								}
+							
+								$(".opbtn").html('申领活动').removeClass('disabled').click(function() {
+									companyJoin(id, data);
+								});
+								break;
+							case 2:
+								$(".opbtn").removeClass('disabled').click(function() {
+									//  personJoin(id);
+								});
+								break;
+							case 3:
+								$(".opbtn").html('已申领该活动');
+								break;
+							case 5:
+								$(".opbtn").html('等待审核');
+								break;
+							case 4:
+								$(".opbtn").html('已加入活动');
+								break;
+							case 6:
+								$(".opbtn").html('等待审核');
+								break;
+						}
+						$(".company-list tbody").html('');
+						for (var i in data.companys) {
+							$(".company-list tbody").append('<tr><td>' + data.companys[i] + '</td></tr>');
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

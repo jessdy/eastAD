@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+		<script src="../static/comm.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>电梯协会志愿者 - 微信平台</title>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id='detail'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">志愿者信息</h1>
+				</header>
+				<div class="content">
+					<div class="list-block" style="margin: 0.5rem 0;">
+						<ul>
+							<!-- Text inputs -->
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">姓名</div>
+										<div class="item-input" id="p-name">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">性别</div>
+										<div class="item-input" id="p-gender">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">联系电话</div>
+										<div class="item-input" id="p-mobile">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">身份证号</div>
+										<div class="item-input" id="p-idno">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">出生日期</div>
+										<div class="item-input" id="p-birth">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">部门</div>
+										<div class="item-input" id="p-department">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">职务</div>
+										<div class="item-input" id="p-job">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">QQ</div>
+										<div class="item-input" id="p-qq">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">电子邮箱</div>
+										<div class="item-input" id="p-email">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">志愿者证号</div>
+										<div class="item-input" id="p-vnum">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="content-block">
+						<div class="row">
+							<div class="col-50">
+								<a href="#" class="button button-big button-fill button-pass button-primary">审核通过</a>
+							</div>
+							<div class="col-50">
+								<a href="#" class="button button-big button-fill button-nopass button-danger">审核不通过</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				var id = $.getParam("id");
+				$.ajax({
+					url: "../services/volunteer/" + id,
+					success: function(data) {
+						for(var i in data) {
+							$("#p-" + i).html(data[i]);
+						}
+					}
+				});
+				$(".button-pass").click(function() {
+					$.ajax({
+						url: '../services/volunteerpass/' + id,
+						type: 'post',
+						success: function() {
+							$.router.back();
+						}
+					})
+				});
+				$(".button-nopass").click(function() {
+					$.ajax({
+						url: '../services/volunteernopass/' + id,
+						type: 'post',
+						success: function() {
+							$.router.back();
+						}
+					})
+				});
+			});
+		</script>
+	</body>
+
+</html>

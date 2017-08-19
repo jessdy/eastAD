@@ -1,0 +1,112 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="static/html5.js"></script>
+<script type="text/javascript" src="static/respond.min.js"></script>
+<script type="text/javascript" src="static/PIE_IE678.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/icheck/icheck.css" />
+<link href="static/umeditor/themes/default/css/umeditor.css"
+	type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/style.css" />
+<link rel="stylesheet"
+	href="static/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>关于我们</title>
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+		关于我们 <a
+			class="btn btn-success radius r"
+			style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<article class="page-container">
+		<form class="form form-horizontal" id="form-article-add"
+			action="" method="post">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">关于我们：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<script id="myEditor" type="text/plain"
+						style="width: 100%; height: 400px;"></script>
+					<input type="hidden" name="content" />
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+					<button id="saveBtn" class="btn btn-secondary radius" type="button">
+						<i class="Hui-iconfont">&#xe632;</i> 保存
+					</button>
+					<button onClick="history.go(-1);" class="btn btn-default radius"
+						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				</div>
+			</div>
+		</form>
+	</article>
+	<script type="text/javascript" src="static/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="static/layer/2.1/layer.js"></script>
+	<script type="text/javascript"
+		src="static/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="static/juicer-min.js"></script>
+	<script type="text/javascript" src="static/umeditor/umeditor.config.js"></script>
+	<script type="text/javascript" src="static/umeditor/umeditor.min.js"></script>
+	<script type="text/javascript" src="static/comm.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var um;
+
+			$.ajax({
+				url: 'aboutus',
+				type: 'get',
+				success: function(data){
+					$("input[name=content]").val(data.content || '');
+					um = UM.getEditor('myEditor');
+					um.addListener( 'ready', function( editor ) {
+					    um.setContent(decodeURI(data.content || ''), false);
+					});
+					
+				}
+			})
+
+			$("#saveBtn").click(function() {
+				$("input[name=content]").val(um.getContent());
+				$.ajax({
+					url: 'aboutus',
+					method: 'post',
+					data: {
+						content : $("input[name=content]").val()
+					},
+					success: function(data){
+						if(data.status == 1) {
+							layer.alert('保存成功！');
+						} 
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

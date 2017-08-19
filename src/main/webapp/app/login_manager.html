@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/sm.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+
+	<body>
+		<div class="page-group">
+    		<div class="page" id="page-login">
+    			<!-- 登陆页面开始 -->
+				<header class="bar bar-nav">
+					<h1 class="title">摊主认证</h1>
+				</header>
+				<div class="content">
+					<img src="images/header.png" style="width: 100%;" />
+					<div class="card">
+						<div class="card-header" style="padding: 0;">
+							<div class="title" style="margin:0;">我是摊主</div>
+							<a class="icon icon-picture pull-left"></a>
+						</div>
+						<div class="card-content">
+							<div class="card-content-inner">
+								<div class="list-block">
+									<ul>
+										<!-- Text inputs -->
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon icon-form-name"></i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="text" placeholder="手机号" name="mobile">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon icon-form-email"></i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="email" placeholder="输入认证码" name="encode">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<p>
+												<div class="content-block">
+													<a class="button button-big button-fill button-danger author">提交认证</a>
+													<a href="login_manager.html" id="direct"></a>
+												</div>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /登录页面结束 -->
+			</div>
+		</div>
+		<script src="js/zepto.js"></script>
+		<script src="js/sm.js"></script>
+    	<script src="js/sm-extend.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(document).on('click', '.author', function(){
+					$.showPreloader('认证检查中');
+					$.ajax({
+						type: "post",
+						data: {
+							mobile: $("input[name=mobile]").val(),
+							encode: $("input[name=encode]").val()
+						},
+						url: "/services/weixin/app/manager/login",
+						success: function(data){
+							$.hidePreloader();
+							if(data.status == 1) {
+								$.alert('验证通过', function(){
+									$.router.load("index_manager.html", true);
+								});
+							} else {
+								$.alert('验证失败');
+							}
+						}
+					});
+				});
+			})
+		</script>
+	</body>
+
+</html>

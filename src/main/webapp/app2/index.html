@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0XDRb6FgFiVwgWc7lPKG5Udx9nGnpdpQ"></script>
+		<script src="../static/juicer-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/comm.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/controller.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>电梯协会志愿者 - 微信平台</title>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id='homepage'>
+				<div class="content">
+					<div>
+						<img src="images/title.jpg" style="width: 100%;" />
+					</div>
+					<div class="list-block media-list" style="margin-top: 0;">
+						<ul>
+							<li>
+								<a class="item-content item-link" href="#about">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu01.jpg);">关于我们</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a class="item-content item-link" href="#event">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu02.jpg);">
+											公益资讯
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a class="item-content item-link" href="#news">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu03.jpg);">
+											公益脚印
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li style="display: none;" id="joinlink">
+								<a class="item-content item-link" href="#join">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu04.jpg);">
+											加入志愿者
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li style="display: none;" id="infolink">
+								<a class="item-content item-link" href="#myinfo">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu05.jpg);">
+											企业信息
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li style="display: none;" id="infolinkerr">
+								<a href="register-company.html" class="item-content item-link" external>
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu05.jpg);">
+											企业信息 <label style="color:red;font-size:0.5rem;margin-left:0.5rem;">审核未通过</label>
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li style="display: none;" id="infolink2">
+								<a class="item-content item-link" href="#myinfo2">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu05.jpg);">
+											我的信息
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li style="display: none;" id="infolinkerr2">
+								<a href="register-person.html" class="item-content item-link" external>
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu05.jpg);">
+											我的信息 <label style="color:red;font-size:0.5rem;margin-left:0.5rem;">审核未通过</label>
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li style="display: none;" id="eventlist">
+								<a class="item-content item-link" href="#myevent">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu06.jpg);">
+											我的活动
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li style="display: none;" id="teamlist">
+								<a class="item-content item-link" href="#myteam">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu04.jpg);">
+											志愿者队伍
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a class="item-content item-link" href="news-detail.html?id=d131f58b-a7ef-4037-ad78-4de3ba5e7de3&from=singlemessage&isappinstalled=0">
+									<div class="item-inner">
+										<div class="item-title index-title" style="background-image: url(images/menu01.jpg);">企业操作指南</div>
+										<div class="item-after"></div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- 关于我们 -->
+			<div class="page" id='about'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">关于我们</h1>
+				</header>
+				<div class="content">
+					<div>
+						<img src="images/about.jpg" style="width: 100%;" />
+					</div>
+					<div class="content-padded"></div>
+				</div>
+			</div>
+			<!-- /关于我们 -->
+			<!-- 公益资讯 -->
+			<div class="page" id='event'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">公益资讯</h1>
+				</header>
+				<div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
+					<div class="list-block event-list media-list">
+						<ul class="list-container">
+						</ul>
+					</div>
+					<!-- 加载提示符 -->
+					<div class="infinite-scroll-preloader">
+						<div class="preloader"></div>
+					</div>
+				</div>
+			</div>
+			<!-- /公益资讯 -->
+			<!-- 新闻详细 -->
+			<div class="page" id='detail'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title"></h1>
+				</header>
+				<div class="content">
+					<div>
+						<img src="images/about.jpg" style="width: 100%;" />
+					</div>
+					<div class="content-padded"></div>
+				</div>
+			</div>
+			<!-- /新闻详细 -->
+			<!-- 公益脚印 -->
+			<div class="page" id='news'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">公益脚印</h1>
+				</header>
+				<div class="content" style="background-color: #fff;">
+					<div style="padding: 0.5rem;">
+						<div id="map" style="width: 100%; height: 18rem;"></div>
+						<table class="company-list" style="margin-top: 1rem;" id="company-list">
+							<thead>
+								<tr>
+									<th>活动列表：</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /公益脚印 -->
+			<!-- 加入志愿者 -->
+			<div class="page" id='join'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">加入志愿者</h1>
+				</header>
+				<div class="content">
+					<div class="content-padded">
+						<div class="content-padded">
+							<a href="register-person.html" class="button button-fill button-primary button-join" external>加入志愿者队伍</a>
+						</div>
+						<div class="content-padded">
+							<a href="register-company.html" class="button button-fill button-primary button-join" external>建立志愿者队伍 </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /加入志愿者 -->
+			<!-- 个人志愿者信息 -->
+			<div class="page" id='myinfo'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">企业信息</h1>
+				</header>
+				<div class="content">
+					<div class="list-block" style="margin: 0.5rem 0;">
+						<ul>
+							<!-- Text inputs -->
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业名称</div>
+										<div class="item-input" id="v-name">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">营业执照代码</div>
+										<div class="item-input" id="v-code">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业电话</div>
+										<div class="item-input" id="v-telephone">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业邮箱</div>
+										<div class="item-input" id="v-email">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业网站</div>
+										<div class="item-input" id="v-website">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">法人代表姓名</div>
+										<div class="item-input" id="v-faren">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">志愿者负责人</div>
+										<div class="item-input" id="v-contactor">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">负责人职务</div>
+										<div class="item-input" id="v-contactjob">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">负责人电话</div>
+										<div class="item-input" id="v-contactphone">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">负责人身份证</div>
+										<div class="item-input" id="v-contactid">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">志愿者团队名</div>
+										<div class="item-input" id="v-teamname">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="content-padded">
+						<div class="content-padded">
+							<img src="" style="width: 80%;" id="pic1p" />
+						</div>
+						<div class="content-padded">
+							<img src="" style="width: 80%;" id="pic2p" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /个人志愿者信息 -->
+			
+			<!-- 个人志愿者信息 -->
+			<div class="page" id='myinfo2'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">我的信息</h1>
+				</header>
+				<div class="content">
+					<div class="list-block" style="margin: 0.5rem 0;">
+						<ul>
+							<!-- Text inputs -->
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">姓名</div>
+										<div class="item-input" id="p-name">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">性别</div>
+										<div class="item-input" id="p-gender">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">联系电话</div>
+										<div class="item-input" id="p-mobile">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">身份证号</div>
+										<div class="item-input" id="p-idno">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">出生日期</div>
+										<div class="item-input" id="p-birth">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">部门</div>
+										<div class="item-input" id="p-department">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">职务</div>
+										<div class="item-input" id="p-job">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">QQ</div>
+										<div class="item-input" id="p-qq">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">电子邮箱</div>
+										<div class="item-input" id="p-email">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">志愿者证号</div>
+										<div class="item-input" id="p-vnum">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">所属企业</div>
+										<div class="item-input" id="p-company">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /个人志愿者信息 -->
+			
+			<!-- 我的队伍 -->
+			<div class="page" id='myteam'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">志愿者队伍</h1>
+				</header>
+				<div class="content" style="background-color: #fff;">
+					<div class="content-padded">
+						<div class="content-padded">
+							<a href="register-person2.html" class="button button-fill button-primary button-join" external>我也是志愿者</a>
+						</div>
+					</div>
+					<div style="padding: 0.5rem;">
+						<table class="company-list">
+							<thead>
+								<tr>
+									<th>志愿者列表：</th>
+								</tr>
+							</thead>
+							<tbody id="teamvolunteers">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /我的队伍-->
+			
+			<!-- 参加活动的志愿者 -->
+			<div class="page" id='eventjoin'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">志愿者累计时间</h1>
+				</header>
+				<div class="content" style="background-color: #fff;">
+					<div class="content-padded">
+						<div class="content-padded">
+							<a href="#eventtime" class="button button-fill button-primary button-join">添加活动时间</a>
+						</div>
+					</div>
+					<div style="padding: 0.5rem;">
+						<table class="company-list" style="margin-top: 0rem;">
+							<thead>
+								<tr>
+									<th>志愿者列表：</th>
+								</tr>
+							</thead>
+							<tbody id="addTimelist">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /参加活动的志愿者-->
+			
+			<!-- 添加活动时间 -->
+			<div class="page" id="eventtime">
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">添加活动时间</h1>
+				</header>
+				
+				<div class="content">
+					<div class="list-block" style="margin:0">
+						<ul>
+							<!-- Text inputs -->
+							<li>
+								<div class="item-content item-link">
+									<div class="item-media"><i class="icon icon-form-name"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">志愿者</div>
+										<div class="item-input">
+											<select name="person">
+											</select>
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content item-link">
+									<div class="item-media"><i class="icon icon-form-name"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">活动日期</div>
+										<div class="item-input">
+											<select name="eventDate">
+											</select>
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content item-link">
+									<div class="item-media"><i class="icon icon-form-name"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">加分数量</div>
+										<div class="item-input">
+											<input type="text" name="score" />
+										</div>
+										<div class="item-after"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="content-padded">
+						<div class="content-padded">
+							<button class="button button-fill button-primary button-join" id="addTime">确定添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /添加活动时间 -->
+			
+			<!-- 我的活动 -->
+			<div class="page" id='myevent'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">我的活动</h1>
+				</header>
+				<div class="content" style="background-color: #fff;">
+					<div style="padding: 0.5rem;">
+						<table class="company-list">
+							<thead>
+								<tr>
+									<th>活动列表：</th>
+								</tr>
+							</thead>
+							<tbody id="myevents">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /我的活动-->
+		</div>
+
+		<script id="events-tpl" type="text/template">
+			{@each content as it,index}
+			<li>
+				<div class="item-content">
+					<div class="item-media">
+						<img src="/upload/${it.pic}" />
+					</div>
+					<div class="item-inner">
+						<div class="item-title-row">
+							<div class="item-title">${it.name}</div>
+							{@if it.creator != null && it.creator != 'bbb'}
+							<span style="font-size: 12px;display: block;background: rgb(249,92,20);color: white; padding: 0 5px;">企业发布</span>
+							{@/if}
+						</div>
+						<div class="item-subtitle">${it.description}</div>
+						<div class="item-text">
+							<div class="row" style="margin-top: 0.2rem">
+								<div class="col-33">${it.uptime|onlydate}</div>
+								<div class="col-33"><a href="detail.html?id=${it.id}" class="button button-success button-fill" external>我要加入 </a></div>
+								<div class="col-33"><a href="detail.html?id=${it.id}" class="button button-fill button-primary button-detail" external>点击详情</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			{@/each}
+		</script>
+		<script id="volunteer-tpl" type="text/template">
+			{@each content as it,index}
+			<tr>
+				<td>
+					<a href="volunteer.html?id=${it.id}" external>[${it.vnum}]${it.name}（${it.status==1?'审核通过':(it.status==-1?'审核未通过':'未审核')}）</a>
+					<a href="javascript:;" data-id="${it.id}" style="width: 5rem;float: right;margin: 0.2rem;" class="tomanager button button-fill button-danger">${it.ismanager==1?'取消管理':'设为管理'}</a>
+					{@if it.score > 0}
+					<span style="color:green;float:right">${it.score}小时</span>
+					{@/if}
+				</td>
+			</tr>
+			{@/each}
+		</script>
+		<script id="eventjoin-tpl" type="text/template">
+			{@each content as it,index}
+			<tr>
+				<td>
+					[${it.eventDate}]${it.personObj.name}(${it.personObj.vnum})</a>
+					<a href="javascript:;" data-id="${it.id}" style="width: 2.5rem;float: right;margin: 0.2rem;" class="deljoin button button-fill button-danger">删除</a>
+					<span style="float:right;color: green;margin-right: 1em;">${it.score > 0 ? ('+' + it.score) : (it.score < 0 ? (it.score) : '')}</span>
+				</td>
+			</tr>
+			{@/each}
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$(".tomanager").live('click', function(e) {
+					var mid = $(this).data('id');
+					$.ajax({
+						url: '../services/volunteer/manager/' + mid,
+						type: 'post',
+						success: function() {
+							$.alert('操作成功', function(){
+								window.location.reload();
+							});
+						}
+					});
+				});
+				
+				$("#myevents a").live('click', function(e){
+					if($(this).data('id')) {
+						window.localStorage['id'] = $(this).data('id');
+						$.router.load('#eventjoin', true);	
+					} else {
+						$.alert('审核未通过，无法查看');
+					}
+				});
+				
+				$(".deljoin").live('click', function(e) {
+					var mid = $(this).data('id');
+					$.modal({
+						text: '是否删除此次加分记录？',
+						buttons: [{
+							text: '确定',
+							onClick: function() {
+								$.ajax({
+									url: '../services/eventjoin/' + mid + '/-1',
+									type: 'get',
+									success: function() {
+										window.location.reload();
+									}
+								})
+							}
+						}, {
+							text: '取消',
+							onClick: function() {
+								window.location.reload();
+							}
+						}]
+					});
+				});
+				
+				/* $("#joinvolunteers a").live('click', function(e){
+					var eid = $(this).data('id');
+					if($(this).data('status') != 1) {
+						// 未审核
+						$.modal({
+							text: '是否审核通过志愿者参加活动？',
+							buttons: [{
+								text: '审核通过',
+								onClick: function() {
+									$.ajax({
+										url: '../services/eventjoin/' + eid + '/1',
+										success: function() {
+											window.location.reload();
+										}
+									})
+								}
+							}, {
+								text: '审核不通过',
+								onClick: function() {
+									$.ajax({
+										url: '../services/eventjoin/' + eid + '/-1',
+										success: function() {
+											window.location.reload();
+										}
+									});
+								}
+							}]
+						})
+					} else {
+						$.prompt('为本次活动添加多少志愿时间（小时）', function (value) {
+							$.ajax({
+								url: '../services/eventjoin/' + eid,
+								type: 'post',
+								data: {
+									score: value
+								},
+								success: function() {
+									$.alert('本次活动志愿者将获得' + value + '小时志愿时间', function(){
+										window.location.reload();
+									});
+								}
+							});
+						});
+					}
+				}); */
+				
+				var pageswitch = function(page) {
+					switch (page) {
+						case 'about':
+							$.pages.about();
+							break;
+						case 'event':
+							$.pages.event();
+							break;
+						case 'detail':
+							$.pages.detail();
+							break;
+						case 'news':
+							$.pages.news();
+							break;
+						case 'newsdetail':
+							$.pages.newsdetail();
+							break;
+						case 'personjoin':
+							$.pages.personjoin();
+							break;
+						case 'companyjoin':
+							$.pages.companyjoin();
+							break;
+						case 'myinfo':
+							$.pages.myinfo();
+							break;
+						case 'myteam':
+							$.pages.myteam();
+							break;
+						case 'eventjoin':
+							$.pages.eventjoin();
+							break;
+						case 'eventtime':
+							$.pages.eventtime();
+							break;
+						case 'myevent':
+							$.pages.myevent();
+							break;
+					}
+				}
+				var pageId = window.location.hash.substr(1);
+				pageswitch(pageId);
+				$(document).on("pageInit", function(e, pageId, $page) {
+					pageswitch(pageId);
+				});
+				$(document).on("pageLoadStart", function() {
+					$.showIndicator();
+				});
+				$.ajax({
+					type: "post",
+					url: "/services/weixin/app/config",
+					data: {
+						url: window.location.href
+					},
+					success: function(data) {
+						data.debug = false;
+						wx.config(data);
+						wx.ready(function() {});
+					}
+				});
+			});
+
+			function chooseImage(hd) {
+				wx.chooseImage({
+					count: 1,
+					success: function(res) {
+						var localIds = res.localIds;
+						uploadimg(localIds, hd);
+					}
+				});
+			}
+
+			function uploadimg(ids) {
+				$.showPreloader('页面加载中');
+				wx.uploadImage({
+					localId: ids[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+					isShowProgressTips: 1, // 默认为1，显示进度提示
+					success: function(res) {
+						var serverId = res.serverId; // 返回图片的服务器端ID
+						$.ajax({
+							type: "post",
+							url: "/services/weixin/app/upload2",
+							data: {
+								pic: serverId
+							},
+							success: function(data) {
+								$.hidePreloader();
+								if (data.status == 0) {
+									$.alert(data.msg);
+								} else {
+									$("input[name=" + hd + "]").val("/upload/" + data.url);
+									$("#" + hd + "p").attr("src", "/upload/" + data.url);
+								}
+							}
+						});
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

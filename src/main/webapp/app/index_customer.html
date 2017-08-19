@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/sm.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page" id="page-index">
+				<!-- 登陆页面开始 -->
+				<header class="bar bar-nav">
+					<a class="button-link button-nav pull-left back" style="color: white;" onclick="history.go(-1)">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">查看广告</h1>
+				</header>
+				<div class="content" style="text-align: center;">
+					<div class="content-padded">
+						<div class="content-padded">
+							<div class="col-60">
+								<br />
+								<a href="customer_map.html" class="button button-big button-fill button-primary external" external>地图方式查看</a>
+								<br />
+								<a href="customer_list.html" class="button button-big button-fill button-primary external" external>列表方式查看</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /登录页面结束 -->
+			</div>
+		</div>
+		<script src="js/zepto.js"></script>
+		<script src="js/sm.js"></script>
+		<script src="js/sm-extend.js"></script>
+		<script type="text/javascript">
+			$.config = {router: false}
+			$(function() {
+				
+			})
+		</script>
+	</body>
+
+</html>

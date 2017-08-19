@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+		<script src="../static/comm.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>电梯协会志愿者 - 微信平台</title>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id='personjoin'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">我的信息</h1>
+				</header>
+				<div class="content">
+					<div class="list-block" style="margin:0">
+						<ul>
+							<!-- Text inputs -->
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-name"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">姓名</div>
+										<div class="item-input">
+											<input name="name" type="text" placeholder="请填写姓名">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-gender"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">性别</div>
+										<div class="item-input">
+											<select name="gender">
+											<option>男</option>
+											<option>女</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">联系电话</div>
+										<div class="item-input">
+											<input name="mobile" type="text" placeholder="请填写联系电话">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">身份证号</div>
+										<div class="item-input">
+											<input name="idno" type="text" placeholder="请填写身份证">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-calendar"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">出生日期</div>
+										<div class="item-input">
+											<input name="birth" type="date" placeholder="Birth day" value="1990-01-31">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">部门</div>
+										<div class="item-input">
+											<input name="department" type="text" placeholder="请填写所在部门">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">职务</div>
+										<div class="item-input">
+											<input name="job" type="text" placeholder="请填写职务">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">QQ</div>
+										<div class="item-input">
+											<input name="qq" type="text" placeholder="请填写QQ号">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">电子邮箱</div>
+										<div class="item-input">
+											<input name="email" type="text" placeholder="请填写电子邮箱">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">志愿者证号</div>
+										<div class="item-input">
+											<input name="vnum" type="text" placeholder="请填写志愿者证号">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media"><i class="icon icon-form-email"></i></div>
+									<div class="item-inner">
+										<div class="item-title label">所属企业</div>
+										<div class="item-input">
+											<select name="company">
+											</select>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="content-block">
+						<div class="row">
+							<div class="col-100">
+								<a href="#" class="button button-fill button-join button-primary save-person">提交</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(function() {
+				$.ajax({
+					url: '../services/companys',
+					success: function(data) {
+						for(var i in data) {
+							$("select[name=company]").append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+						}
+					}
+				});
+				$(".save-person").click(function() {
+					$.ajax({
+						url: '../services/volunteer/save',
+						type: 'post',
+						data: {
+							name: $('input[name=name]').val(),
+							gender: $('select[name=gender]').val(),
+							mobile: $('input[name=mobile]').val(),
+							idno: $('input[name=idno]').val(),
+							birth: $('input[name=birth]').val(),
+							department: $('input[name=department]').val(),
+							// wechat: $('input[name=wechat]').val(),
+							job: $('input[name=job]').val(),
+							qq: $('input[name=qq]').val(),
+							email: $('input[name=email]').val(),
+							company: $("select[name=company]").val(),
+							vnum: $('input[name=vnum]').val(),
+						},
+						success: function() {
+							alert('信息已提交，等待审核！');
+							window.location.href = '/app2/';
+						}
+					});
+				})
+			})
+		</script>
+	</body>
+
+</html>

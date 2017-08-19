@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/sm.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page" id="page-index">
+				<!-- 登陆页面开始 -->
+				<header class="bar bar-nav">
+					<a class="button-link button-nav pull-left" href="index_manager.html" style="color: white;" external>
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">拍摄并上传</h1>
+				</header>
+				<div class="content" style="text-align: center;">
+					<img id="preview" src="images/sample.jpg" style="width: 70%;margin: 20px auto;border: 10px solid #ddd" />
+					<div class="content-padded">
+						<div class="content-padded">
+							<div class="col-60">
+								<p>拍摄样张</p>
+								<a href="#" id="camara" class="button button-big button-fill button-danger">点击拍摄</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /登录页面结束 -->
+			</div>
+		</div>
+		<script src="js/zepto.js"></script>
+		<script src="js/sm.js"></script>
+		<script src="js/sm-extend.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$.showPreloader('页面加载中');
+				$.ajax({
+					type: "post",
+					url: "/services/weixin/app/config",
+					data: {
+						url: window.location.href
+					},
+					success: function(data) {
+						data.debug = false;
+						wx.config(data);
+						wx.ready(function() {
+							$.hidePreloader();
+						});
+					}
+				});
+				$(document).on('click', '#camara', function() {
+					wx.getLocation({
+						type: 'wgs84', 
+						success: function(res) {
+							var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+							var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+							chooseImage(latitude, longitude);
+						}
+					});
+				});
+
+				function chooseImage(latitude, longitude) {
+					wx.chooseImage({
+						count: 1,
+						sourceType: ['camera'],
+						success: function(res) {
+							var localIds = res.localIds;
+							uploadimg(localIds, latitude, longitude);
+						}
+					});
+				}
+
+				function uploadimg(ids, latitude, longitude) {
+					$.showPreloader('页面加载中');
+					wx.uploadImage({
+						localId: ids[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+						isShowProgressTips: 1, // 默认为1，显示进度提示
+						success: function(res) {
+							var serverId = res.serverId; // 返回图片的服务器端ID
+							$.ajax({
+								type: "post",
+								url: "/services/weixin/app/upload",
+								data: {
+									pic: serverId,
+									position: param("position"),
+									latitude: latitude, 
+									longitude: longitude
+								},
+								success: function(data) {
+									$.hidePreloader();
+									if(data.status == 0) {
+										$.alert(data.msg);
+									} else {
+										$("#preview").attr("src", "/upload/" + data.url);
+										window.localStorage.setItem("pos" + data.position, data.url);
+										window.location.href="/app/index_manager.html";
+									}
+								}
+							});
+						}
+					});
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/sm.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+
+	<body>
+		<div class="page-group">
+    		<div class="page" id="page-index">
+    			<!-- 登陆页面开始 -->
+				<header class="bar bar-nav">
+					<a class="button-link button-nav pull-left back" style="color: white;">
+      					<span class="icon icon-left"></span>
+      					返回
+    				</a>
+					<h1 class="title">选择拍摄版面</h1>
+				</header>
+				<div class="content">
+					<img src="images/header.png" style="width: 100%;" />
+					<div class="content-padded">
+						<div class="row">
+							<div class="col-33" id="ad1" style="background-size: cover;">
+								<a class="advertise-block"></a>
+							</div>
+							<div class="col-33" id="ad2" style="background-size: cover;">
+								<a class="advertise-block"></a>
+							</div>
+							<div class="col-33" id="ad3" style="background-size: cover;">
+								<a class="advertise-block"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /登录页面结束 -->
+			</div>
+		</div>
+		<script src="js/zepto.js"></script>
+		<script src="js/sm.js"></script>
+    	<script src="js/sm-extend.js"></script>
+    	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript">
+		$.config = {router: false}
+			$(function(){
+				var urls = [];
+				$.ajax({
+					type:"get",
+					url: "/services/weixin/app/adposition/" + param("id"),
+					success: function(data){
+						if(data.leftphoto) {
+							$("#ad1").css({
+								"backgroundImage" : "url(/upload/" + data.leftphoto + ")"
+							}).data("url", "http://mddt.sh-ea.net.cn/upload/" + data.leftphoto);
+							urls.push("http://mddt.sh-ea.net.cn/upload/" + data.leftphoto);
+						}
+						if(data.centerphoto) {
+							$("#ad2").css({
+								"backgroundImage" : "url(/upload/" + data.centerphoto + ")"
+							}).data("url", "http://mddt.sh-ea.net.cn/upload/" + data.centerphoto);
+							urls.push("http://mddt.sh-ea.net.cn/upload/" + data.centerphoto);
+						}
+						if(data.rightphoto) {
+							$("#ad3").css({
+								"backgroundImage" : "url(/upload/" + data.rightphoto + ")"
+							}).data("url", "http://mddt.sh-ea.net.cn/upload/" + data.rightphoto);
+							urls.push("http://mddt.sh-ea.net.cn/upload/" + data.rightphoto);
+						}
+					}
+				});
+				
+				$.ajax({
+					type: "post",
+					url: "/services/weixin/app/config",
+					data: {
+						url: window.location.href
+					},
+					success: function(data) {
+						data.debug=false;
+						wx.config(data);
+						
+						wx.ready(function() {
+							$(".advertise-block").parent().click(function(){
+								previewPics($(this).data("url"));
+							});
+						});
+					}
+				});
+				
+				function previewPics(current) {
+					wx.previewImage({
+						current: current, // 当前显示图片的http链接
+						urls: urls // 需要预览的图片http链接列表
+					});
+				}
+			})
+		</script>
+	</body>
+
+</html>

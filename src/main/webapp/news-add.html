@@ -1,0 +1,189 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="static/html5.js"></script>
+<script type="text/javascript" src="static/respond.min.js"></script>
+<script type="text/javascript" src="static/PIE_IE678.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/icheck/icheck.css" />
+<link href="static/umeditor/themes/default/css/umeditor.css"
+	type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/style.css" />
+<link rel="stylesheet"
+	href="static/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>新增资讯</title>
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+		志愿者模块 <span class="c-gray en">&gt;</span> 添加脚印 <a
+			class="btn btn-success radius r"
+			style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<article class="page-container">
+		<form class="form form-horizontal" id="form-article-add"
+			action="news/add" method="post">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span
+					class="c-red">*</span>标题：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="" placeholder="" id=""
+						name="name">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span
+					class="c-red">*</span>排序：<br/>（越大越靠前）</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input name="weight" type="text" size="20" class="input-text" />
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span
+					class="c-red">*</span>坐标位置：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input placeholder="请输入搜索" type="text" id="suggestId" size="20" class="input-text" />
+					<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:450px;height:auto; display:none;"></div>
+					<div id="map" style="width: 100%;height: 450px;"></div>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">文章内容：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<script id="myEditor" type="text/plain"
+						style="width: 100%; height: 300px;"></script>
+					<input type="hidden" name="content" />
+					<input type="hidden" name="position" />
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+					<button id="saveBtn" class="btn btn-secondary radius" type="button">
+						<i class="Hui-iconfont">&#xe632;</i> 保存
+					</button>
+					<button onClick="history.go(-1);" class="btn btn-default radius"
+						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				</div>
+			</div>
+		</form>
+	</article>
+	<script type="text/javascript" src="static/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="static/layer/2.1/layer.js"></script>
+	<script type="text/javascript"
+		src="static/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="static/juicer-min.js"></script>
+	<script type="text/javascript" src="static/umeditor/umeditor.config.js"></script>
+	<script type="text/javascript" src="static/umeditor/umeditor.min.js"></script>
+	<script type="text/javascript" src="static/comm.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0XDRb6FgFiVwgWc7lPKG5Udx9nGnpdpQ"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			
+			var map = new BMap.Map("map"),marker;          // 创建地图实例  
+			map.addControl(new BMap.NavigationControl());
+			map.enableScrollWheelZoom(true);
+			map.clearOverlays();
+			var point = new BMap.Point(121.480386,31.236559);
+			map.centerAndZoom(point, 15);
+			map.panTo(point);
+			
+			var menu = new BMap.ContextMenu();
+			menu.addItem(new BMap.MenuItem('添加', function(e) {
+				addMarker(new BMap.Point(e.lng, e.lat))				
+			}))
+			map.addContextMenu(menu);
+			
+			var ac = new BMap.Autocomplete({"input" : "suggestId","location" : map});
+			ac.addEventListener("onhighlight", function(e) {
+				var str = "";
+				var _value = e.fromitem.value;
+				if (e.fromitem.index > -1) {
+					value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+				}
+				str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+				value = "";
+				if (e.toitem.index > -1) {
+					_value = e.toitem.value;
+					value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+				}    
+				str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+				$("#searchResultPanel").html(str);
+			});
+			var myValue;
+			ac.addEventListener("onconfirm", function(e) {
+				var _value = e.item.value;
+				myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+				$("#searchResultPanel").html("onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue);
+				setPlace();
+			});
+			
+			function setPlace(){
+				function myFun(){
+					var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+					addMarker(pp);
+				}
+				var local = new BMap.LocalSearch(map, { //智能搜索
+				  	onSearchComplete: myFun
+				});
+				local.search(myValue);
+			}
+			
+			function addMarker(point) {
+				var marker = new BMap.Marker(point);
+				map.centerAndZoom(point, 15);
+				map.panTo(point);
+				map.addOverlay(marker);
+				marker.enableDragging();
+				var markerMenu = new BMap.ContextMenu();
+				markerMenu.addItem(new BMap.MenuItem('删除此处', function() {
+					map.removeOverlay(marker);
+				}));
+				marker.addContextMenu(markerMenu);
+			}
+			
+			
+			var um = UM.getEditor('myEditor');
+
+			$("#saveBtn").click(function() {
+				$("input[name=content]").val(um.getContent());
+				var markers = map.getOverlays();
+				var position = [];
+				for(var i in markers) {
+					if(markers[i].point && markers[i].isVisible()) {
+						position.push(markers[i].point.lng + "," + markers[i].point.lat);
+					}
+				}
+				$("input[name=position]").val(position.join(";"));
+				$("#form-article-add").submit();
+			});
+			
+			
+			
+		});
+	</script>
+</body>
+</html>

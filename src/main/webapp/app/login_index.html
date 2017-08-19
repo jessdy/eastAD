@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/sm.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+
+	<body>
+		<!-- 
+		<div class="page-group">
+    		<div class="page" id="page-login">
+     -->
+		<!-- 登陆页面开始 -->
+		<div class="page-group">
+			<div class="page" id="page-login-index">
+				<header class="bar bar-nav">
+					<h1 class="title">登 录</h1>
+				</header>
+				<div class="content">
+					<img src="images/header.png" style="width: 100%;" />
+					<div class="content-padded grid-demo">
+						<div class="row">
+							<div class="col-50">
+								<a href="/services/weixin/login" class="button button-big login-button" style="font-size: 0.7rem; font-weight: normal;">
+									<span class="icon icon-home"></span> 我是摊主
+								</a>
+							</div>
+							<div class="col-50">
+								<a href="/services/weixin/xlogin" class="button button-big login-button" style="font-size: 0.7rem;font-weight: normal;">
+									<span class="icon icon-emoji"></span> 我是巡视员
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" style="padding: 0;">
+							<div class="title" style="margin:0;login_index.html">我是广告客户</div>
+							<a class="icon icon-picture pull-left"></a>
+						</div>
+						<div class="card-content">
+							<div class="card-content-inner">
+								<div class="list-block">
+									<ul>
+										<!-- Text inputs -->
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon icon-form-name"></i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="text" name="username" placeholder="客户账号">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon icon-form-email"></i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="password" name="upassword" placeholder="输入密码">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<p>
+												<div class="content-block">
+													<a href="#" id="loginit" class="button button-big button-fill button-danger">登 录</a>
+												</div>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- /登录页面结束 -->
+		<!-- 
+			</div>
+		</div>
+		 -->
+		<script src="js/zepto.js"></script>
+		<script src="js/sm.js"></script>
+		<script src="js/sm-extend.js"></script>
+		<script type="text/javascript">
+			$.config = {router: false}
+			$(function() {
+				window.localStorage.removeItem("pos1");
+				window.localStorage.removeItem("pos2");
+				window.localStorage.removeItem("pos3");
+				$(document).on('click', '#loginit', function() {
+					$.showPreloader('登录中');
+					$.ajax({
+						type: "post",
+						data: {
+							username: $("input[name=username]").val(),
+							upassword: $("input[name=upassword]").val()
+						},
+						url: "/services/weixin/app/customer/login",
+						success: function(data) {
+							$.hidePreloader();
+							if (data.status == 1) {
+								$.alert('验证通过', function() {
+									window.location.href = "index_customer.html";
+								});
+							} else {
+								$.alert('验证失败');
+							}
+						}
+					});
+				});
+			})
+		</script>
+	</body>
+
+</html>

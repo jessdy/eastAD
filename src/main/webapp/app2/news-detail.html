@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+		<script src="../static/comm.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<style>
+<!--
+span {white-space: normal !important;}
+-->
+</style>
+		<title>电梯协会志愿者 - 微信平台</title>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id='newsdetail'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">公益脚印</h1>
+				</header>
+				<div class="content" style="background-color: #fff;">
+					<div class="content-padded">
+						<div class="article-title">
+						</div>
+						<div class="content-padded">
+							<div class="button button-fill button-light article-date"></div>
+						</div>
+						<div class="content-padded article-content"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				var id = $.getParam("id");
+				$.ajax({
+					url: "../news/" + id,
+					success: function(data) {
+						$(".article-title").html(data.name);
+						$(".article-date").html(new Date(data.uptime).Format('yyyy-MM-dd'));
+						$(".article-content").html(data.content);
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

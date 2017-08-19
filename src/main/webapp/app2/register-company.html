@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+		<script src="../static/comm.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>电梯协会志愿者 - 微信平台</title>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id='companyjoin'>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back">
+						<span class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">企业信息</h1>
+				</header>
+				<div class="content">
+					<div class="list-block" style="margin: 0.5rem 0;">
+						<ul>
+							<!-- Text inputs -->
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业名称</div>
+										<div class="item-input">
+											<input name="name" type="text" placeholder="企业名称">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">营业执照代码</div>
+										<div class="item-input">
+											<input name="code" type="text" placeholder="营业执照代码">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业电话</div>
+										<div class="item-input">
+											<input name="telephone" type="text" placeholder="企业电话">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业邮箱</div>
+										<div class="item-input">
+											<input name="email" type="text" placeholder="企业邮箱">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">企业网站</div>
+										<div class="item-input">
+											<input name="website" type="text" placeholder="企业网站">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">法人代表姓名</div>
+										<div class="item-input">
+											<input name="faren" type="text" placeholder="法人代表姓名">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">志愿者负责人</div>
+										<div class="item-input">
+											<input name="contactor" type="text" placeholder="志愿者负责人">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">负责人职务</div>
+										<div class="item-input">
+											<input name="contactjob" type="text" placeholder="志愿者负责人职务">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">负责人电话</div>
+										<div class="item-input">
+											<input name="contactphone" type="text" placeholder="志愿者负责人电话">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">负责人身份证</div>
+										<div class="item-input">
+											<input name="contactid" type="text" placeholder="志愿者负责人身份证号">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title label">志愿者团队名</div>
+										<div class="item-input">
+											<input name="teamname" type="text" placeholder="志愿者团队名称">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="content-padded">
+						<div class="content-padded">
+							<a href="#" class="button button-fill button-join button-info" id="uppic1" onclick="chooseImage('pic1')">上传营业执照</a>
+							<input name="pic1" type="hidden" />
+							<img src="" style="width: 80%;" id="pic1p" />
+						</div>
+						<div class="content-padded">
+							<a href="#" class="button button-fill button-join button-info" id="uppic2" onclick="chooseImage('pic2')">上传志愿者负责人身份证</a>
+							<input name="pic2" type="hidden" />
+							<img src="" style="width: 80%;" id="pic2p" />
+						</div>
+					</div>
+					<div class="content-block">
+						<div class="row">
+							<div class="col-100">
+								<a href="#" class="button button-fill button-join button-primary save-company">提交</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$.ajax({
+					type: "post",
+					url: "/services/weixin/app/config",
+					data: {
+						url: window.location.href
+					},
+					success: function(data) {
+						data.debug = false;
+						wx.config(data);
+						wx.ready(function() {});
+					}
+				});
+				$(".save-company").click(function() {
+					$.ajax({
+						type: "post",
+						url: '../services/volunteercompany/save',
+						data: {
+							name: $('input[name=name]').val(),
+							code: $('select[name=code]').val(),
+							telephone: $('input[name=telephone]').val(),
+							email: $('input[name=email]').val(),
+							website: $('input[name=website]').val(),
+							faren: $('input[name=faren]').val(),
+							contactor: $('input[name=contactor]').val(),
+							contactjob: $('input[name=contactjob]').val(),
+							contactphone: $('input[name=contactphone]').val(),
+							contactid: $('input[name=contactid]').val(),
+							teamname: $('input[name=teamname]').val(),
+							pic1: $('input[name=pic1]').val(),
+							pic2: $('input[name=pic2]').val()
+						},
+						success: function() {
+							alert('信息已提交，等待审核！');
+							window.location.href = '/app2/';
+						}
+					});
+				})
+			})
+
+			function chooseImage(hd) {
+				wx.chooseImage({
+					count: 1,
+					success: function(res) {
+						var localIds = res.localIds;
+						uploadimg(localIds, hd);
+					}
+				});
+			}
+
+			function uploadimg(ids, hd) {
+				$.showPreloader('页面加载中');
+				wx.uploadImage({
+					localId: ids[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+					isShowProgressTips: 1, // 默认为1，显示进度提示
+					success: function(res) {
+						var serverId = res.serverId; // 返回图片的服务器端ID
+						$.ajax({
+							type: "post",
+							url: "/services/weixin/app/upload2",
+							data: {
+								pic: serverId
+							},
+							success: function(data) {
+								$.hidePreloader();
+								if (data.status == 0) {
+									$.alert(data.msg);
+								} else {
+									$("input[name=" + hd + "]").val("/upload/" + data.url);
+									$("#" + hd + "p").attr("src", "/upload/" + data.url);
+								}
+							}
+						});
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,164 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="static/html5.js"></script>
+<script type="text/javascript" src="static/respond.min.js"></script>
+<script type="text/javascript" src="static/PIE_IE678.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/style.css" />
+<link rel="stylesheet"
+	href="static/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>上传照片查看</title>
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+		书报亭模块 <span class="c-gray en">&gt;</span> 上传照片查看 <a
+			class="btn btn-success radius r"
+			style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<div class="page-container">
+
+		<div class="cl pd-5 bg-1 bk-gray">
+			<span class="l">
+				<select name="district" id="district" class="input-text w100">
+					<option value="">请选择行政区</option>
+				</select>
+				<select id="newsstand" class="input-text w300">
+					<option value="">请选择书报亭</option>
+				</select>
+				按编号查询：<input type="text" id="code" placeholder="书报亭编号" class="input-text w200" />
+				<button class="btn btn-primary radius" id="submit">查询</button>
+			</span>
+		</div>
+		<div class="mt-20">
+			<div id="DataTables" class="dataTables_wrapper no-footer">
+			
+				<table class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
+						<tr class="text-c">
+							<th width="70">行政区</th>
+							<th width="70">书报亭编号</th>
+							<th width="120">书报亭</th>
+							<th width="120">左侧照片</th>
+							<th width="120">中部照片</th>
+							<th width="120">右侧照片</th>
+							<th width="80">上传时间</th>
+						</tr>
+					</thead>
+					<tbody id="data"></tbody>
+				</table>
+					<script id="tpl" type="text/template">
+					{@each content as it,index}
+						<tr class="text-c">
+							<td>${it.standarea|area}</td>
+							<td>${it.code}</td>
+							<td class="text-l">${it.standname}</td>
+							<td><img src="/upload/${it.leftphoto}" height="200" /></td>
+							<td><img src="/upload/${it.centerphoto}" height="200" /></td>
+							<td><img src="/upload/${it.rightphoto}" height="200" /></td>
+							<td>${it.updatetime|t}</td>
+						</tr>
+					{@/each}
+					</script>
+				<div class="pageGo"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="static/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="static/layer/2.1/layer.js"></script>
+	<script type="text/javascript"
+		src="static/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="static/juicer-min.js"></script>
+	<script type="text/javascript" src="static/comm.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			juicer.register('area', function(d){
+				return $.districts[d];
+			});
+			juicer.register('t', function(d){
+				return new Date(d).Format("yyyy-MM-dd hh:mm:ss");
+			});
+			for ( var i in $.districts) {
+				$("#district").append(
+						'<option value="' + i + '">' + $.districts[i]
+								+ '</option>');
+			}
+			$("#district").change(function() {
+				$.ajax({
+					url : 'newsstand/area',
+					type : "POST",
+					cache : false,
+					dataType : 'json',
+					data : {
+						id : $("#district").val()
+					},
+					success : function(data) {
+						$("#newsstand").html("<option value=''>请选择书报亭</option>");
+						for ( var i in data) {
+							$("#newsstand").append('<option value="'+data[i].id+'">'
+											+ data[i].name
+											+ '</option>');
+						}
+					}
+				});
+			});
+			$("#newsstand").change(function(){
+				$("#code").val("");
+				loadData(1);
+			})
+			function loadData(pageno) {
+				$.ajax({
+					url: 'customer/photos',
+					type : "POST",
+					cache : false,
+					dataType : 'json',
+					data : JSON.stringify({
+						page : pageno,
+						pagesize : 15,
+						code: $("#code").val(),
+						stand: $("#newsstand").val()
+					}),
+					success : function(data) {
+						$("#data").html("");
+						if(data.content && data.content.length > 0) {
+							$("#data").html(juicer($("#tpl").html(), data));
+							$(".pageGo").paging(data, loadData);
+						}
+					}
+				});
+			}
+			loadData(1);
+			
+			$("#submit").click(function(){
+				$("#newsstand").val("");
+				loadData(1);
+			});
+		});
+	</script>
+</body>
+</html>
